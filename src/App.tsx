@@ -16,7 +16,6 @@ export default function App() {
       <footer>
         <h3>Created by Cob Salad</h3>
       </footer>
-
     </>
   )
 }
