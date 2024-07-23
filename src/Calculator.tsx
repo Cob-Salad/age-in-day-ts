@@ -4,20 +4,26 @@ import React, { useState } from "react";
 
 const Calculator: React.FC = () => {
     const [name, setName] = useState("");
-    const [age, setAge] = useState<number | string>();
+    const [age, setAge] = useState<number | string>("");
+    const [ageInDays, setAgeInDays] = useState(0)
 
+    // Takes in the text box contents
     const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setAge(event.target.valueAsNumber);
     }
 
-    const calcAge = (age) => {
-        let ageInDays = age*365
+    // Calculate ageInDays
+    const calcAge: React.FormEventHandler<HTMLFormElement> = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setAgeInDays(Number(age)*365)
         console.log(ageInDays)
+
     }
+
 
     return (
         <>
-        <form onSubmit={calcAge(age)}>
+        <form onSubmit={calcAge}>
             <div id="calculator">
                 <label htmlFor="name">Name</label>
                 <input 
@@ -35,7 +41,7 @@ const Calculator: React.FC = () => {
                 placeholder="1000 y/o"
                 onChange={handleAgeChange}/>
                 <input type="submit"/>
-                <p> </p>
+                <h3>Congrats {name}! You are {ageInDays} days old!</h3>
             </div>
         </form>
         </>
